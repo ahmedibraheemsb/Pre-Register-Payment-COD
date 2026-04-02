@@ -651,7 +651,16 @@
       const res  = await fetch(workerUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${workerSecret}` },
-        body: JSON.stringify({ action: 'preRegister', orderId: o.id }),
+        body: JSON.stringify({
+          action: 'preRegister',
+          orderId: o.id,
+          amount: o.amount.toFixed(2),
+          orderName: o.orderName,
+          subtotal: o.subtotal.toFixed(2),
+          shippingAmount: o.shippingAmount.toFixed(2),
+          courier: o.courier,
+          lineItems: o.lineItems,
+        }),
       });
       const data = await res.json();
 
